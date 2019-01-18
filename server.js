@@ -5,7 +5,7 @@ const fs = require('fs')
 
 server.on('request', function (req, res) {
 
-  fs.readFile('apple.html', 'utf8', function (err, data) {
+  fs.readFile('source/apple.html', 'utf8', function (err, data) {
 
     if (err) {
       res.writeHead(404, {
