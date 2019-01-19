@@ -1062,6 +1062,7 @@
 
 	<script>
 		let i = 0;
+		let qid = 'section-store';
 		let target = document.body;
 		// console.log( target.hasChildNodes())
 		// console.log(typeof target.childNodes, target.childNodes.length)
@@ -1071,19 +1072,26 @@
 		}
 
 		let cnt = 0;
-		const stack = target.hasChildNodes() ? [target]:[] //[rootNode];
+		let stack = target.hasChildNodes() ? [target]:[] //[rootNode];
 		const dequeue = array => {
-			const item = array.shift();
-			console.log(item);
+			const item = array.pop();
+			// const item = array.shift();
+			if(qid == item.id) {
+				console.log('#######');
+				stack = []
+			}
+			
 			return item;
 		}
 		while (stack.length > 0) {
 			const node = dequeue(stack);
 			cnt++
-			if (node.hasChildNodes || node.hasChildNodes() != undefined) {
+			if (node.hasChildNodes != undefined && node.hasChildNodes() ) {
 				// console.log(cnt)
 				// while()
+
 				for(let i in node.childNodes){
+					console.log(cnt, node.childNodes[i])
 					
 					stack.push( node.childNodes[i])
 				}
