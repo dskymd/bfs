@@ -1063,24 +1063,33 @@
 	<script>
 		let i = 0;
 		let target = document.body;
-
-		for (let item in target) {
+		// console.log( target.hasChildNodes())
+		// console.log(typeof target.childNodes, target.childNodes.length)
+		for (let item in target.childNodes) {
 			i++
-			console.log(item + ' : ' + typeof target[item] + ' : ', target[item])
+			// console.log(item + ' : ' + typeof target.childNodes[item] + ' : ', target.childNodes[item])
 		}
 
-		const stack = [rootNode];
+		let cnt = 0;
+		const stack = target.hasChildNodes() ? [target]:[] //[rootNode];
 		const dequeue = array => {
 			const item = array.shift();
 			console.log(item);
 			return item;
 		}
 		while (stack.length > 0) {
-			const row = dequeue(stack);
-			if (row.children) {
-				row.children.forEach(childNode => stack.push(Object.assign(childNode, {
-					parent: row.tag
-				})));
+			const node = dequeue(stack);
+			cnt++
+			if (node.hasChildNodes || node.hasChildNodes() != undefined) {
+				// console.log(cnt)
+				// while()
+				for(let i in node.childNodes){
+					
+					stack.push( node.childNodes[i])
+				}
+				// node.children.forEach(childNode => stack.push(Object.assign(childNode, {
+				// 	parent: node.tag
+				// })));
 			}
 		}
 	</script>
