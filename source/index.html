@@ -1029,37 +1029,6 @@
 
 	<!-- JavaScript -->
 
-	<!-- 
-	<script type="text/javascript" src="https://bluelug.com/js/jquery-2.2.4.min.js"></script>
-	<script type="text/javascript" src="https://bluelug.com/js/jquery.inview.min.js"></script>
-	<script type="text/javascript" src="https://bluelug.com/js/jquery.sliderPro.min.js"></script>
-	<script type="text/javascript" src="//fast.fonts.net/jsapi/56052d8e-22d0-4dfc-b805-c513c339b96b.js"></script>
-	<script type="text/javascript" src="https://bluelug.com/js/common.js?20190115"></script>
-	<script type="text/javascript">
-		$(function () {
-
-			//loadOnlineStore
-			// initInviewLoad('#section-store', loadOnlineStore)
-
-			//inview delay load - lug, cook  header image, bgimage and blogs
-			initInviewLoad('#section-header-lug', inviewBg)
-			initInviewLoad('#section-header-cook', inviewBg)
-			initInviewLoad('#section-body-cook', inviewBg)
-			initInviewLoad('#section-blog-lug', inviewBlog, {
-				tar: '#section-blog-lug',
-				url: 'https://blog.lug-hatagaya.com/blogfeed'
-			})
-			initInviewLoad('#section-blog-cook', inviewBlog, {
-				tar: '#section-blog-cook',
-				url: 'https://blog.cookpaintworks.com/blogfeed'
-			})
-
-			// all inview-image
-			initInviewLoad('.inview-image', inviewSrc)
-
-		})
-	</script> -->
-
 	<script>
 		let i = 0;
 		let qid = 'section-store';
@@ -1074,25 +1043,23 @@
 		let cnt = 0;
 		let stack = target.hasChildNodes() ? [target]:[] //[rootNode];
 		const dequeue = array => {
-			const item = array.pop();
-			// const item = array.shift();
+			cnt++
+			// const item = array.pop(); //DFS L-In F-Out
+			const item = array.shift(); //BFS F-In F-Out
 			if(qid == item.id) {
-				console.log('#######');
+				console.log(cnt + ' : '+item.id);
 				stack = []
 			}
-			
 			return item;
 		}
 		while (stack.length > 0) {
 			const node = dequeue(stack);
-			cnt++
 			if (node.hasChildNodes != undefined && node.hasChildNodes() ) {
 				// console.log(cnt)
 				// while()
 
 				for(let i in node.childNodes){
-					console.log(cnt, node.childNodes[i])
-					
+					// console.log(cnt, node.childNodes[i])
 					stack.push( node.childNodes[i])
 				}
 				// node.children.forEach(childNode => stack.push(Object.assign(childNode, {
@@ -1100,6 +1067,7 @@
 				// })));
 			}
 		}
+		console.log('end.')
 	</script>
 </body>
 
